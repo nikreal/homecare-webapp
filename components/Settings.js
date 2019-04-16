@@ -85,7 +85,7 @@ class Settings extends Component {
 }
 const commonStyle = {
   width: '80%',
-  margin: 15,
+  margin: 10,
   height: 40,
   borderRadius: 5,
   textAlign: 'center'

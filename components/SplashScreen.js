@@ -6,7 +6,7 @@ export default class SplashScreen extends Component {
     return (
       <View style={styles.container}>
         <Image
-          source={require('../resources/images/mark.png')}
+          source={require('../resources/images/Splash.png')}
           style={styles.logoStyle}
           resizeMode='contain'
         />

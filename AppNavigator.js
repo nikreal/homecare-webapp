@@ -7,11 +7,11 @@ const AppNavigator = StackNavigator(
     Settings: {screen: Settings},
     Website: {screen: Website}
   },
-  // {
-  //   navigationOptions: {
-  //     header: null
-  //   }
-  // }
+  {
+    navigationOptions: {
+      header: null
+    }
+  }
 );
 
 export default AppNavigator;
