@@ -27,28 +27,27 @@ class Settings extends Component {
     this.setState({url: text})    
   }
   setPage = () => {
-    if (!this.state.password || this.state.password == '') {
-      // password none
-      this.setState({validPassword: false});
-    } else {
-      this.setState({validPassword: true});      
-    }
-    if (!this.validateUrl(this.state.url)) {
-      // not a valid url
-      this.setState({validUrl: false});
-    } else {
-      // valid url
-      this.setState({validUrl: true});      
-    }
-    if (this.state.validPassword && this.state.validUrl) {
+    
+    if (this.state.password && this.validateUrl(this.state.url)) {
       this.props.setPassword(this.state.password);
       this.props.setWebsite(this.state.url);
+      this.setState({
+        validPassword: true,
+        validateUrl: true,
+      });
+      this.props.navigation.navigate('Website');
+      return;
     }
+    this.setState({validPassword: !(!this.state.password)});
+    this.setState({validUrl: this.validateUrl(this.state.url)});   
+    
   }
   refresh = () => {
     this.setState({
       password: '',
-      url: ''
+      url: '',
+      validPassword: true,
+      validUrl: true,
     })
   }
 

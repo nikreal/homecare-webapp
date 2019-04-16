@@ -8,7 +8,9 @@
 
 import React, {Component} from 'react';
 import SplashScreen from './components/SplashScreen';
-import Settings from './components/Settings';
+import AppNavigator from './AppNavigator';
+import {Provider} from 'react-redux';
+import store from './reducer';
 
 type Props = {};
 class App extends Component<Props> {
@@ -46,8 +48,11 @@ class App extends Component<Props> {
     }
 
     return (
-      <Settings />
+      <Provider store={store}>
+        <AppNavigator />
+      </Provider>
     );
   }
 }
+
 export default App;
