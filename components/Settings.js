@@ -27,7 +27,6 @@ class Settings extends Component {
     this.setState({url: text})    
   }
   setPage = () => {
-    
     if (this.state.password && this.validateUrl(this.state.url)) {
       this.props.setPassword(this.state.password);
       this.props.setWebsite(this.state.url);
