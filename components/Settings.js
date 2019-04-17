@@ -66,6 +66,7 @@ class Settings extends Component {
     return (
       <View style={styles.container}>
         {
+          // when click the settings button, it shows REFRESH BUTTON
           this.state.reset ? (
             <TouchableOpacity
               style = {styles.button}

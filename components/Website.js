@@ -20,9 +20,9 @@ class Website extends React.Component {
         <View style={{...styles.topbar, backgroundColor: '#4D207F', zIndex: 20, opacity: 0.8}} />
         <View style={{...styles.topbar, zIndex: 25}}>
           {
-            this.state.openSidebar ? (<View style={{flex: 1}}/>) : (<View/>)
+            this.state.openSidebar ? (<View style={{width: 200}}/>) : (<View/>)
           }          
-          <View style={{flex: 2}}>
+          <View style={{flexGrow: 1}}>
             <Image style={styles.logo}
               source={require('../resources/images/Icon.png')}
               resizeMode='contain'
@@ -65,12 +65,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   sidebar: {
-    flex: 1,
+    width: 200,
     paddingTop: 60, 
     backgroundColor: '#787878'
   },
   main: {
-    flex: 2
+    flexGrow: 1
   },
   topbar: {
     height: 60,
