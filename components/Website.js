@@ -6,7 +6,7 @@ import Settings from './Settings';
 
 class Website extends React.Component {
   state = {    
-    openSidebar: true,
+    openSidebar: false,
   }
   handleSettings = () => {
     this.setState({openSidebar: !this.state.openSidebar});
@@ -31,7 +31,13 @@ class Website extends React.Component {
         </View>
         <View style={styles.container2}>
           {
-            this.state.openSidebar ? (<View style={{paddingTop: 60, backgroundColor: '#787878', flex: 1}}><Settings /></View>) : (<Text/>)
+            this.state.openSidebar ? (
+              <View style={styles.sidebar}>
+                <Settings reset={true} navigation={this.props.navigation}/>
+              </View>
+            ) : (
+              <Text/>
+            )
           }
           <View style={styles.main}>
             <View style={styles.triangle}/>
@@ -52,7 +58,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   sidebar: {
-    flex: 1
+    flex: 1,
+    paddingTop: 60, 
+    backgroundColor: '#787878'
   },
   main: {
     flex: 2

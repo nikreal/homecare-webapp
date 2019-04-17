@@ -9,25 +9,37 @@ class Settings extends Component {
     url: '',
     validPassword: true,
     validUrl: true,
+    reset: false,
   }
   componentDidMount() {
     this.setState({
-      password: this.props.password,
       url: this.props.url,
     })
+    if (this.props && this.props.reset) {
+      this.setState({reset: true});
+    }
   }
   validateUrl = (url) => {
     var re = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
       return re.test(url);
   };
   handlePassword = (text) => {
+    // if (this.state.reset) {
+    //   this.setState({validPassword: this.state.password === text});
+    // }
     this.setState({password: text})
   }
   handleUrl = (text) => {
     this.setState({url: text})    
   }
   setPage = () => {
-    if (this.state.password && this.validateUrl(this.state.url)) {
+    
+    if (
+      // Check existing password and validation of url when reset website  
+      (this.state.reset && this.state.password === this.props.password && this.validateUrl(this.state.url)) || 
+      // When app starts, validation of password and url
+      (!this.state.reset && this.state.password && this.validateUrl(this.state.url))
+    ) {
       this.props.setPassword(this.state.password);
       this.props.setWebsite(this.state.url);
       this.setState({
@@ -37,7 +49,12 @@ class Settings extends Component {
       this.props.navigation.navigate('Website');
       return;
     }
-    this.setState({validPassword: !(!this.state.password)});
+    if (this.state.reset) {
+      this.setState({validPassword: this.state.password === this.props.password});
+    }
+    else {
+      this.setState({validPassword: !(!this.state.password)});
+    }    
     this.setState({validUrl: this.validateUrl(this.state.url)});   
     
   }
@@ -62,6 +79,7 @@ class Settings extends Component {
           style = {this.state.validPassword ? styles.input : {...styles.input, ...invalid}}
           underlineColorAndroid = "transparent"
           placeholder = "password"
+          secureTextEntry={this.state.reset}
           placeholderTextColor = "grey"
           autoCapitalize = "none"
           value = {this.state.password}
