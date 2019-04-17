@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableOpacity} from 'react-native';
 import {connect} from "react-redux";
 import {setPassword, setWebsite} from '../action';
+// import * as CacheManager from 'react-native-http-cache';
 
 class Settings extends Component {
   state = {    
@@ -24,9 +25,6 @@ class Settings extends Component {
       return re.test(url);
   };
   handlePassword = (text) => {
-    // if (this.state.reset) {
-    //   this.setState({validPassword: this.state.password === text});
-    // }
     this.setState({password: text})
   }
   handleUrl = (text) => {
@@ -59,22 +57,26 @@ class Settings extends Component {
     
   }
   refresh = () => {
-    this.setState({
-      password: '',
-      url: '',
-      validPassword: true,
-      validUrl: true,
-    })
+    // CacheManager.clear(() => {
+      this.props.navigation.navigate('Website');
+    // })    
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity
-          style = {styles.button}
-          onPress = {this.refresh}>
-          <Text style = {styles.buttonText}>REFERESH</Text>
-        </TouchableOpacity>
+        {
+          this.state.reset ? (
+            <TouchableOpacity
+              style = {styles.button}
+              onPress = {this.refresh}>
+              <Text style = {styles.buttonText}>REFERESH</Text>
+            </TouchableOpacity>
+          ) : (
+            <View />
+          )  
+        }
+        
         <TextInput 
           style = {this.state.validPassword ? styles.input : {...styles.input, ...invalid}}
           underlineColorAndroid = "transparent"
