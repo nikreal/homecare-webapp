@@ -68,9 +68,13 @@ class Settings extends Component {
     
   }
   refresh = () => {
-    // CacheManager.clear(() => {
-      this.props.navigation.navigate('Website');
-    // })    
+    // Password check
+    if (this.state.password === this.props.password) {
+      this.setState({validPassword: true});
+      this.props.onRefresh();
+    } else {
+      this.setState({validPassword: false});
+    }    
   }
 
   render() {

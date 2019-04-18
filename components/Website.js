@@ -1,12 +1,14 @@
 import React from 'react';
 import {connect} from "react-redux";
-import { StyleSheet, View, Text, Image, WebView } from 'react-native';
-// import { WebView } from 'react-native-webview';
+import { StyleSheet, View, Text } from 'react-native';
+import { WebView } from 'react-native-webview';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Settings from './Settings';
+import WebViewCleaner from "react-native-webview-cleaner";
 
 
 class Website extends React.Component {
+  webview = null;
   state = {    
     openSidebar: false,
     url: ''
@@ -20,6 +22,11 @@ class Website extends React.Component {
   }
   changeWebsite = (url) => {
     this.setState({url: url});
+    this.setState({openSidebar: false});
+  }
+  handleRefresh = () => {
+    WebViewCleaner.clearAll();
+    this.webview.reload();
     this.setState({openSidebar: false});
   }
   render() {
@@ -38,7 +45,7 @@ class Website extends React.Component {
           {
             this.state.openSidebar ? (
               <View style={styles.sidebar}>
-                <Settings reset={true} navigation={this.props.navigation} onPress={this.changeWebsite.bind(this)}/>
+                <Settings reset={true} navigation={this.props.navigation} onPress={this.changeWebsite.bind(this)} onRefresh={this.handleRefresh.bind(this)}/>
               </View>
             ) : (
               <Text/>
@@ -46,7 +53,8 @@ class Website extends React.Component {
           }
           <View style={styles.main}>
             <View style={styles.triangle}/>
-            <WebView 
+            <WebView
+              ref={ref => (this.webview = ref)} 
               useWebKit={true}
               originWhitelist={['*']}
               cacheEnabled={false}

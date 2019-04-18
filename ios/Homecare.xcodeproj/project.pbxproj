@@ -50,6 +50,7 @@
 		B4C7C74A1BBD4399A39FFC87 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C12EF0B77CB74122A2E84904 /* SimpleLineIcons.ttf */; };
 		7B83D92FE9254292BF49EC08 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 934713B169DD4779A6807F0A /* Zocial.ttf */; };
 		F617CBF63A934875840F8396 /* libRNCWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3F0A61E6FEA4D58B8DAC501 /* libRNCWebView.a */; };
+		1579CBB8300046308A968D6B /* libRNWebViewCleaner.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AE797F116EDA4E94B4E0900F /* libRNWebViewCleaner.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -370,6 +371,8 @@
 		934713B169DD4779A6807F0A /* Zocial.ttf */ = {isa = PBXFileReference; name = "Zocial.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		67BBCFD17F63463598CFAF0B /* RNCWebView.xcodeproj */ = {isa = PBXFileReference; name = "RNCWebView.xcodeproj"; path = "../node_modules/react-native-webview/ios/RNCWebView.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		C3F0A61E6FEA4D58B8DAC501 /* libRNCWebView.a */ = {isa = PBXFileReference; name = "libRNCWebView.a"; path = "libRNCWebView.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		0E7B742E255B457B91FA332E /* RNWebViewCleaner.xcodeproj */ = {isa = PBXFileReference; name = "RNWebViewCleaner.xcodeproj"; path = "../node_modules/react-native-webview-cleaner/ios/RNWebViewCleaner.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		AE797F116EDA4E94B4E0900F /* libRNWebViewCleaner.a */ = {isa = PBXFileReference; name = "libRNWebViewCleaner.a"; path = "libRNWebViewCleaner.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -399,6 +402,7 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				7397E9468DE74AAC8C7328C1 /* libRNVectorIcons.a in Frameworks */,
 				F617CBF63A934875840F8396 /* libRNCWebView.a in Frameworks */,
+				1579CBB8300046308A968D6B /* libRNWebViewCleaner.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,6 +591,7 @@
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				BC81BBE8212A407DA2966EA1 /* RNVectorIcons.xcodeproj */,
 				67BBCFD17F63463598CFAF0B /* RNCWebView.xcodeproj */,
+				0E7B742E255B457B91FA332E /* RNWebViewCleaner.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1246,11 +1251,13 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-webview/ios",
+					"$(SRCROOT)/../node_modules/react-native-webview-cleaner/ios/RNWebViewCleaner",
 				);
 			};
 			name = Debug;
@@ -1273,11 +1280,13 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-webview/ios",
+					"$(SRCROOT)/../node_modules/react-native-webview-cleaner/ios/RNWebViewCleaner",
 				);
 			};
 			name = Release;
@@ -1302,6 +1311,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-webview/ios",
+					"$(SRCROOT)/../node_modules/react-native-webview-cleaner/ios/RNWebViewCleaner",
 				);
 			};
 			name = Debug;
@@ -1325,6 +1335,7 @@
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-webview/ios",
+					"$(SRCROOT)/../node_modules/react-native-webview-cleaner/ios/RNWebViewCleaner",
 				);
 			};
 			name = Release;
@@ -1355,11 +1366,13 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-webview/ios",
+					"$(SRCROOT)/../node_modules/react-native-webview-cleaner/ios/RNWebViewCleaner",
 				);
 			};
 			name = Debug;
@@ -1390,11 +1403,13 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-webview/ios",
+					"$(SRCROOT)/../node_modules/react-native-webview-cleaner/ios/RNWebViewCleaner",
 				);
 			};
 			name = Release;
@@ -1424,11 +1439,13 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-webview/ios",
+					"$(SRCROOT)/../node_modules/react-native-webview-cleaner/ios/RNWebViewCleaner",
 				);
 			};
 			name = Debug;
@@ -1458,11 +1475,13 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-vector-icons/RNVectorIconsManager",
 					"$(SRCROOT)/../node_modules/react-native-webview/ios",
+					"$(SRCROOT)/../node_modules/react-native-webview-cleaner/ios/RNWebViewCleaner",
 				);
 			};
 			name = Release;
