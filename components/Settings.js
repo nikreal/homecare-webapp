@@ -19,16 +19,20 @@ class Settings extends Component {
       this.setState({reset: true});
     }
   }
+  // Validation url format
   validateUrl = (url) => {
     var re = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
       return re.test(url);
   };
+
   handlePassword = (text) => {
     this.setState({password: text})
   }
   handleUrl = (text) => {
     this.setState({url: text})    
   }
+
+  // change google.com to https://google.com
   makeFullUrl = (url) => {
     var re = /^(?:http(s)?:\/\/)/;
     if(re.test(url)) return url;
@@ -37,6 +41,7 @@ class Settings extends Component {
       return 'https://'+url;
     }
   }
+
   setPage = () => {
     
     if (
@@ -45,31 +50,43 @@ class Settings extends Component {
       // When app starts, validation of password and url
       (!this.state.reset && this.state.password && this.validateUrl(this.state.url))
     ) {
+      // Save password and url in Redux store.
       this.props.setPassword(this.state.password);
       this.props.setWebsite(this.makeFullUrl(this.state.url));
+
+      // Set validatioin to true.
       this.setState({
         validPassword: true,
         validateUrl: true,
       });
-      if (this.state.reset) { // When reset the url by click settings button on webview page, reset the webpage with new url.
+      
+      // When reset the url by click settings button on webview page, reset the webpage with new url.
+      if (this.state.reset) { 
         this.props.onPress(this.makeFullUrl(this.state.url));
-      } else { // When the app starts, navigate to webview page.
+      } else { 
+        // When the app starts, navigate to webview page.
         this.props.navigation.navigate('Website');
       }
       return;
     }
+
+    // Confirm existing password on Settings page after app is running.
     if (this.state.reset) {
       this.setState({validPassword: this.state.password === this.props.password});
     }
     else {
+      // Check if password is inputed when app starts at the first time.
       this.setState({validPassword: !(!this.state.password)});
-    }    
+    }
+    
+    // Check url validation status
     this.setState({validUrl: this.validateUrl(this.state.url)});   
     
   }
   refresh = () => {
     // Password check
     if (this.state.password === this.props.password) {
+      // If password is correct, allow to refresh page. It will be doing on Website component.
       this.setState({validPassword: true});
       this.props.onRefresh();
     } else {

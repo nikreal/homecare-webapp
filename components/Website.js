@@ -13,25 +13,35 @@ class Website extends React.Component {
     openSidebar: false,
     url: ''
   }
+  // Save a url of Redux store to local state.
   componentDidMount() {
     this.setState({url: this.props.url})
   }
+
+  // When click settings icon.
   handleSettings = () => {
     this.setState({openSidebar: !this.state.openSidebar});
     console.log(this.state.openSidebar);
   }
+
+  // When click 'Set Page' button.
   changeWebsite = (url) => {
     this.setState({url: url});
     this.setState({openSidebar: false});
   }
+
+  // When click 'REFRESH' button.
   handleRefresh = () => {
     WebViewCleaner.clearAll();
     this.webview.reload();
     this.setState({openSidebar: false});
   }
+
   render() {
     return (
       <View style={styles.container}>
+
+        {/* Top bar */}
         <View style={styles.topbar}>
           {
             this.state.openSidebar ? (<View style={{width: 200}}/>) : (<View/>)
@@ -41,7 +51,10 @@ class Website extends React.Component {
           </View>
         </View>
         
+        {/* Main Container with sidebar and main page */}
         <View style={styles.container2}>
+
+          {/* Sidebar */}
           {
             this.state.openSidebar ? (
               <View style={styles.sidebar}>
@@ -51,6 +64,8 @@ class Website extends React.Component {
               <Text/>
             )
           }
+
+          {/* Main Webview Page */}
           <View style={styles.main}>
             <View style={styles.triangle}/>
             <WebView
