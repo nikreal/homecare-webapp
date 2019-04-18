@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux";
-import { StyleSheet, View, Text, Image } from 'react-native';
-import { WebView } from 'react-native-webview';
+import { StyleSheet, View, Text, Image, WebView } from 'react-native';
+// import { WebView } from 'react-native-webview';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Settings from './Settings';
 
@@ -9,24 +9,27 @@ import Settings from './Settings';
 class Website extends React.Component {
   state = {    
     openSidebar: false,
+    url: ''
+  }
+  componentDidMount() {
+    this.setState({url: this.props.url})
   }
   handleSettings = () => {
     this.setState({openSidebar: !this.state.openSidebar});
     console.log(this.state.openSidebar);
   }
+  changeWebsite = (url) => {
+    this.setState({url: url});
+    this.setState({openSidebar: false});
+  }
   render() {
     return (
       <View style={styles.container}>
-        <View style={{...styles.topbar, backgroundColor: '#4D207F', zIndex: 20, opacity: 0.8}} />
-        <View style={{...styles.topbar, zIndex: 25}}>
+        <View style={styles.topbar}>
           {
             this.state.openSidebar ? (<View style={{width: 200}}/>) : (<View/>)
           }          
-          <View style={{flexGrow: 1}}>
-            <Image style={styles.logo}
-              source={require('../resources/images/Icon.png')}
-              resizeMode='contain'
-            />
+          <View style={styles.main}>
             <Icon style={styles.settings} name="cog" size={20} color="#ddd" onPress={this.handleSettings}/>
           </View>
         </View>
@@ -35,7 +38,7 @@ class Website extends React.Component {
           {
             this.state.openSidebar ? (
               <View style={styles.sidebar}>
-                <Settings reset={true} navigation={this.props.navigation}/>
+                <Settings reset={true} navigation={this.props.navigation} onPress={this.changeWebsite.bind(this)}/>
               </View>
             ) : (
               <Text/>
@@ -44,11 +47,11 @@ class Website extends React.Component {
           <View style={styles.main}>
             <View style={styles.triangle}/>
             <WebView 
-              style={styles.webview}
               useWebKit={true}
               originWhitelist={['*']}
               cacheEnabled={false}
-              source={{uri: this.props.url}} />
+              startInLoadingState={true}
+              source={{uri: this.state.url}} />
           </View>
         </View>
       </View>
@@ -59,15 +62,14 @@ class Website extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#fff'
   },
   container2: {
     flex: 1,
     flexDirection: 'row',
   },
   sidebar: {
-    width: 200,
-    paddingTop: 60, 
-    backgroundColor: '#787878'
+    width: 200
   },
   main: {
     flexGrow: 1
@@ -79,6 +81,7 @@ const styles = StyleSheet.create({
     top: 0,
     flex: 1,
     flexDirection: 'row',
+    zIndex: 25
   },
   settings: {
     position: 'absolute',
@@ -95,19 +98,8 @@ const styles = StyleSheet.create({
     borderTopColor: '#787878',
     position: 'absolute',
     top: 0,
-    zIndex: 2
-  },
-  logo: {
-    marginTop: 10,
-    marginBottom: 10,
-    height: 40,
-    marginLeft: 'auto',
-    marginRight: 'auto',
-    width: 40,
-    opacity: 1,
-  },
-  webview: {
-    marginTop: 60,
+    zIndex: 2,
+    opacity: 0.8
   }
 });
 

@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Text, TextInput, TouchableOpacity} from 'react-native';
 import {connect} from "react-redux";
 import {setPassword, setWebsite} from '../action';
-// import * as CacheManager from 'react-native-http-cache';
 
 class Settings extends Component {
   state = {    
@@ -30,6 +29,14 @@ class Settings extends Component {
   handleUrl = (text) => {
     this.setState({url: text})    
   }
+  makeFullUrl = (url) => {
+    var re = /^(?:http(s)?:\/\/)/;
+    if(re.test(url)) return url;
+    else {
+      console.log('https://'+url);
+      return 'https://'+url;
+    }
+  }
   setPage = () => {
     
     if (
@@ -39,12 +46,16 @@ class Settings extends Component {
       (!this.state.reset && this.state.password && this.validateUrl(this.state.url))
     ) {
       this.props.setPassword(this.state.password);
-      this.props.setWebsite(this.state.url);
+      this.props.setWebsite(this.makeFullUrl(this.state.url));
       this.setState({
         validPassword: true,
         validateUrl: true,
       });
-      this.props.navigation.navigate('Website');
+      if (this.state.reset) { // When reset the url by click settings button on webview page, reset the webpage with new url.
+        this.props.onPress(this.makeFullUrl(this.state.url));
+      } else { // When the app starts, navigate to webview page.
+        this.props.navigation.navigate('Website');
+      }
       return;
     }
     if (this.state.reset) {
@@ -122,6 +133,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#787878',
+    opacity: 0.8
   },
   input: {
     ...commonStyle,
