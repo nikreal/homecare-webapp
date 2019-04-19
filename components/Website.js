@@ -5,7 +5,8 @@ import { WebView } from 'react-native-webview';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Settings from './Settings';
 import WebViewCleaner from "react-native-webview-cleaner";
-
+import Dimensions from 'Dimensions';
+const {width, height} = Dimensions.get('window');
 
 class Website extends React.Component {
   webview = null;
@@ -65,27 +66,7 @@ class Website extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-
-        {/* Top bar */}
-        {
-          this.state.openSidebar ? (
-            <View style={styles.topbar}>
-              <View style={styles.sidebar}>
-                <Settings reset={true} navigation={this.props.navigation} onPress={this.changeWebsite.bind(this)} onRefresh={this.handleRefresh.bind(this)}/>
-              </View>
-              <TouchableOpacity style={styles.triangle} activeOpacity={0.8} onPress={this.handleSettings}>
-                <Icon style={styles.settings} name="cog" size={20} color="#ddd"/>
-              </TouchableOpacity>
-            </View>
-          ) : (
-            <View style={styles.topbar}>
-              <TouchableOpacity style={styles.triangle} activeOpacity={0.8} onPress={this.handleSettings}>
-                <Icon style={styles.settings} name="cog" size={20} color="#ddd"/>
-              </TouchableOpacity>
-            </View>
-          )
-        }
-          <WebView
+        <WebView
             key={this.state.key}
             ref={ref => (this.webview = ref)} 
             useWebKit={true}
@@ -96,6 +77,30 @@ class Website extends React.Component {
             onNavigationStateChange={navState => {
               this.canGoBack = navState.canGoBack;
             }} />
+        {/* Top bar */}
+        {
+          this.state.openSidebar ? (
+            <View style={styles.topbar}>
+              <View style={styles.sidebar}>
+                <Settings reset={true} navigation={this.props.navigation} onPress={this.changeWebsite.bind(this)} onRefresh={this.handleRefresh.bind(this)}/>
+              </View>
+              <View style={styles.triangle}>
+                <TouchableOpacity style={styles.settings} activeOpacity={0.8} onPress={this.handleSettings}>
+                  <Icon  name="cog" size={20} color="#ddd"/>
+                </TouchableOpacity>
+              </View>
+            </View>
+          ) : (
+            <View style={styles.topbar}>
+              <View style={styles.triangle}>
+                <TouchableOpacity style={styles.settings} activeOpacity={0.8} onPress={this.handleSettings}>
+                  <Icon  name="cog" size={20} color="#ddd"/>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )
+        }
+        
       </View>
     );
   }
@@ -107,25 +112,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     backgroundColor: '#fff'
   },
-  container2: {
-    flex: 1,
-    flexDirection: 'row',
-  },
   sidebar: {
-    width: 200
+    width: 200,
+    height: height
   },
   topbar: {
     position: 'absolute',
     top: 0,
-    bottom: 0,
-    zIndex: 25,
     flexDirection: 'row'
   },
   settings: {
     position: 'absolute',
-    top: -65,
-    left: 15,
-    zIndex: 25
+    top: -80,
+    left: 0,
+    zIndex: 25,
+    padding: 13
   },
   triangle: {
     width: 0,
@@ -135,7 +136,7 @@ const styles = StyleSheet.create({
     borderRightWidth: 80,
     borderColor: 'transparent',
     borderTopColor: '#787878',
-    zIndex: 2,
+    zIndex: 5,
     opacity: 0.8
   },
   webview: {
