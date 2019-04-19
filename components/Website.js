@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import { WebView } from 'react-native-webview';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Settings from './Settings';
@@ -11,7 +11,8 @@ class Website extends React.Component {
   webview = null;
   state = {    
     openSidebar: false,
-    url: ''
+    url: '',
+    key: 1
   }
   // Save a url of Redux store to local state.
   componentDidMount() {
@@ -33,8 +34,10 @@ class Website extends React.Component {
   // When click 'REFRESH' button.
   handleRefresh = () => {
     WebViewCleaner.clearAll();
-    this.webview.reload();
-    this.setState({openSidebar: false});
+    this.setState({
+      openSidebar: false,
+      key: this.state.key + 1
+    });
   }
 
   render() {
@@ -47,7 +50,7 @@ class Website extends React.Component {
             this.state.openSidebar ? (<View style={{width: 200}}/>) : (<View/>)
           }          
           <View style={styles.main}>
-            <Icon style={styles.settings} name="cog" size={20} color="#ddd" onPress={this.handleSettings}/>
+            
           </View>
         </View>
         
@@ -67,8 +70,12 @@ class Website extends React.Component {
 
           {/* Main Webview Page */}
           <View style={styles.main}>
-            <View style={styles.triangle}/>
+
+            <TouchableOpacity style={styles.triangle} activeOpacity={0.8} onPress={this.handleSettings}>
+              <Icon style={styles.settings} name="cog" size={20} color="#ddd"/>
+            </TouchableOpacity>
             <WebView
+              key={ this.state.key }
               ref={ref => (this.webview = ref)} 
               useWebKit={true}
               originWhitelist={['*']}
@@ -103,13 +110,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     flex: 1,
-    flexDirection: 'row',
-    zIndex: 25
+    flexDirection: 'row'
   },
   settings: {
     position: 'absolute',
-    top: 15,
-    left: 15
+    top: -65,
+    left: 15,
+    zIndex: 25
   },
   triangle: {
     width: 0,

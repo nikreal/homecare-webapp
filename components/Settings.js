@@ -84,14 +84,7 @@ class Settings extends Component {
     
   }
   refresh = () => {
-    // Password check
-    if (this.state.password === this.props.password) {
-      // If password is correct, allow to refresh page. It will be doing on Website component.
-      this.setState({validPassword: true});
-      this.props.onRefresh();
-    } else {
-      this.setState({validPassword: false});
-    }    
+    this.props.onRefresh();    
   }
 
   render() {

@@ -6,7 +6,7 @@ export default class SplashScreen extends Component {
     return (
       <View style={styles.container}>
         <Image
-          source={require('../resources/images/Splash.png')}
+          source={require('../resources/images/logo.png')}
           style={styles.logoStyle}
           resizeMode='contain'
         />
@@ -20,9 +20,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#4D207F',
+    backgroundColor: 'white',
   },
   logoStyle: {
-    width: '80%',
+    width: '60%',
   },
 });

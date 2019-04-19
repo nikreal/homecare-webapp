@@ -26,7 +26,7 @@ class App extends Component<Props> {
     return new Promise((resolve) =>
       setTimeout(
         () => { resolve('result') },
-        5000
+        2000
       )
     );
   }
