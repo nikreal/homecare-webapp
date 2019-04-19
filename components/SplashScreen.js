@@ -6,7 +6,7 @@ export default class SplashScreen extends Component {
     return (
       <View style={styles.container}>
         <Image
-          source={require('../resources/images/logo.png')}
+          source={require('../resources/images/mark.png')}
           style={styles.logoStyle}
           resizeMode='contain'
         />
@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
   },
   logoStyle: {
-    width: '60%',
+    width: '80%',
   },
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, BackHandler } from 'react-native';
 import { WebView } from 'react-native-webview';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Settings from './Settings';
@@ -9,14 +9,36 @@ import WebViewCleaner from "react-native-webview-cleaner";
 
 class Website extends React.Component {
   webview = null;
+  canGoBack = false;
   state = {    
     openSidebar: false,
     url: '',
     key: 1
   }
+  constructor(props) {
+    super(props)
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+  }
+
   // Save a url of Redux store to local state.
   componentDidMount() {
     this.setState({url: this.props.url})
+  }
+
+  componentWillMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+  }
+
+  handleBackButtonClick() {
+    if (this.canGoBack) {
+      this.webview.goBack();
+    }
+    else BackHandler.exitApp();
+    return true;
   }
 
   // When click settings icon.
@@ -81,7 +103,10 @@ class Website extends React.Component {
               originWhitelist={['*']}
               cacheEnabled={false}
               startInLoadingState={true}
-              source={{uri: this.state.url}} />
+              source={{uri: this.state.url}}
+              onNavigationStateChange={navState => {
+                this.canGoBack = navState.canGoBack;
+              }} />
           </View>
         </View>
       </View>
