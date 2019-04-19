@@ -67,48 +67,35 @@ class Website extends React.Component {
       <View style={styles.container}>
 
         {/* Top bar */}
-        <View style={styles.topbar}>
-          {
-            this.state.openSidebar ? (<View style={{width: 200}}/>) : (<View/>)
-          }          
-          <View style={styles.main}>
-            
-          </View>
-        </View>
-        
-        {/* Main Container with sidebar and main page */}
-        <View style={styles.container2}>
-
-          {/* Sidebar */}
-          {
-            this.state.openSidebar ? (
+        {
+          this.state.openSidebar ? (
+            <View style={styles.topbar}>
               <View style={styles.sidebar}>
                 <Settings reset={true} navigation={this.props.navigation} onPress={this.changeWebsite.bind(this)} onRefresh={this.handleRefresh.bind(this)}/>
               </View>
-            ) : (
-              <Text/>
-            )
-          }
-
-          {/* Main Webview Page */}
-          <View style={styles.main}>
-
-            <TouchableOpacity style={styles.triangle} activeOpacity={0.8} onPress={this.handleSettings}>
-              <Icon style={styles.settings} name="cog" size={20} color="#ddd"/>
-            </TouchableOpacity>
-            <WebView
-              key={ this.state.key }
-              ref={ref => (this.webview = ref)} 
-              useWebKit={true}
-              originWhitelist={['*']}
-              cacheEnabled={false}
-              startInLoadingState={true}
-              source={{uri: this.state.url}}
-              onNavigationStateChange={navState => {
-                this.canGoBack = navState.canGoBack;
-              }} />
-          </View>
-        </View>
+              <TouchableOpacity style={styles.triangle} activeOpacity={0.8} onPress={this.handleSettings}>
+                <Icon style={styles.settings} name="cog" size={20} color="#ddd"/>
+              </TouchableOpacity>
+            </View>
+          ) : (
+            <View style={styles.topbar}>
+              <TouchableOpacity style={styles.triangle} activeOpacity={0.8} onPress={this.handleSettings}>
+                <Icon style={styles.settings} name="cog" size={20} color="#ddd"/>
+              </TouchableOpacity>
+            </View>
+          )
+        }
+          <WebView
+            key={this.state.key}
+            ref={ref => (this.webview = ref)} 
+            useWebKit={true}
+            originWhitelist={['*']}
+            cacheEnabled={false}
+            startInLoadingState={true}
+            source={{uri: this.state.url}}
+            onNavigationStateChange={navState => {
+              this.canGoBack = navState.canGoBack;
+            }} />
       </View>
     );
   }
@@ -117,6 +104,7 @@ class Website extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'row',
     backgroundColor: '#fff'
   },
   container2: {
@@ -126,15 +114,11 @@ const styles = StyleSheet.create({
   sidebar: {
     width: 200
   },
-  main: {
-    flexGrow: 1
-  },
   topbar: {
-    height: 60,
-    width: '100%',
     position: 'absolute',
     top: 0,
-    flex: 1,
+    bottom: 0,
+    zIndex: 25,
     flexDirection: 'row'
   },
   settings: {
@@ -151,10 +135,14 @@ const styles = StyleSheet.create({
     borderRightWidth: 80,
     borderColor: 'transparent',
     borderTopColor: '#787878',
-    position: 'absolute',
-    top: 0,
     zIndex: 2,
     opacity: 0.8
+  },
+  webview: {
+    alignSelf: 'stretch',
+    position: 'absolute',
+    backgroundColor: 'green',
+    flex: 1
   }
 });
 
