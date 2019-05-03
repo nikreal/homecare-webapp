@@ -15,6 +15,9 @@ npm install
 react-native run-ios
 react-native run-android
 ```
+
+# Issues during run the project
+
 <a href="https://stackoverflow.com/questions/50836558/react-native-config-h-not-found"># Issue: Print: Entry, ":CFBundleIdentifier", Does Not Exist</a>
 
 ```
@@ -25,3 +28,28 @@ cd ../../../..
 react-native run-ios
 ```
 
+<a href="https://zivost.com/blog/xcode-10-causes-haywire-for-react-native-developers/"># Issue: No member named '__rip' in '__darwin_i386_thread_state'; did you mean '__eip'?</a>
+
+Run the following commands in the root of your react-native project.
+```
+cd node_modules/react-native/third-party/glog-0.3.x
+./configure --host arm-apple-darwin
+make
+make install
+```
+
+Edit `node_modules/react-native/third-party/glog-0.3.4/src/config.h`<br><br>
+Replace:
+```
+/* How to access the PC from a struct ucontext */
+#define PC_FROM_UCONTEXT uc_mcontext->__ss.__rip
+```
+With:
+```
+/* How to access the PC from a struct ucontext */
+#if defined(__arm__) || defined(__arm64__)
+#define PC_FROM_UCONTEXT uc_mcontext->__ss.__pc
+#else
+#define PC_FROM_UCONTEXT uc_mcontext->__ss.__rip
+#endif
+```
