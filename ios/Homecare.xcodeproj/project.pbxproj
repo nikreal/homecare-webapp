@@ -1268,7 +1268,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = homecarewebapp.com;
 				PRODUCT_NAME = Homecare;
-				PROVISIONING_PROFILE_SPECIFIER = homecareapp_provision;
+				PROVISIONING_PROFILE_SPECIFIER = homecare_dev;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1297,7 +1297,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = homecarewebapp.com;
 				PRODUCT_NAME = Homecare;
-				PROVISIONING_PROFILE_SPECIFIER = homecareapp_provision;
+				PROVISIONING_PROFILE_SPECIFIER = homecare_dev;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};

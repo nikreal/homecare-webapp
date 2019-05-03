@@ -10,21 +10,18 @@ class Settings extends Component {
     validPassword: true,
     validUrl: true,
     reset: false,
-    firsthLaunch: true,
   }
   componentDidMount() {
-    if (this.state.firstLaunch) {
-      AsyncStorage.getItem("url").then((value) => {
-        this.setState({
-          'url': value,
-          'firstLaunch': false
-        });
-      }).done();
-    } else {
+    AsyncStorage.getItem("url").then((value) => {
+      if (!value) value = this.props.url;
+      this.setState({
+        url: value
+      });
+    }).catch(() => {
       this.setState({
         url: this.props.url,
       })
-    }
+    });
     if (this.props && this.props.reset) {
       this.setState({reset: true});
     }
@@ -63,7 +60,7 @@ class Settings extends Component {
       // Save password and url in Redux store.
       this.props.setPassword(this.state.password);
       this.props.setWebsite(this.makeFullUrl(this.state.url));
-
+      AsyncStorage.setItem('url', this.state.url);
       // Set validatioin to true.
       this.setState({
         validPassword: true,

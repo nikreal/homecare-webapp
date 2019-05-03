@@ -38,8 +38,7 @@ class Website extends React.Component {
     if (this.canGoBack) {
       this.webview.goBack();
     }
-    else {
-      AsyncStorage.setItem('url', this.props.url);
+    else {      
       BackHandler.exitApp();
     }
     return true;
