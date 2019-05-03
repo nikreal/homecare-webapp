@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import { StyleSheet, View, Text, TouchableOpacity, BackHandler } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, BackHandler, AsyncStorage } from 'react-native';
 import { WebView } from 'react-native-webview';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Settings from './Settings';
@@ -38,7 +38,10 @@ class Website extends React.Component {
     if (this.canGoBack) {
       this.webview.goBack();
     }
-    else BackHandler.exitApp();
+    else {
+      AsyncStorage.setItem('url', this.props.url);
+      BackHandler.exitApp();
+    }
     return true;
   }
 

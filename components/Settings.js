@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Text, TextInput, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, TextInput, TouchableOpacity, AsyncStorage} from 'react-native';
 import {connect} from "react-redux";
 import {setPassword, setWebsite} from '../action';
 
@@ -10,11 +10,21 @@ class Settings extends Component {
     validPassword: true,
     validUrl: true,
     reset: false,
+    firsthLaunch: true,
   }
   componentDidMount() {
-    this.setState({
-      url: this.props.url,
-    })
+    if (this.state.firstLaunch) {
+      AsyncStorage.getItem("url").then((value) => {
+        this.setState({
+          'url': value,
+          'firstLaunch': false
+        });
+      }).done();
+    } else {
+      this.setState({
+        url: this.props.url,
+      })
+    }
     if (this.props && this.props.reset) {
       this.setState({reset: true});
     }
