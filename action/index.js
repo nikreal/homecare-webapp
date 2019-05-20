@@ -1,3 +1,8 @@
+export const setHideSettings = ischecked => ({
+  type: 'HIDE_SETTINGS',
+  hideSettings: ischecked,
+});
+
 export const setPassword = password  =>  ({   
   type :  'SET_PASSWORD' , 
   password :  password , 

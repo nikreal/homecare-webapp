@@ -1,12 +1,15 @@
 import {createStore, combineReducers} from 'redux';
 
 const INITIAL_STATE = {
+  hideSettings: false,
   password: '',
   url: 'https://google.com',
 }
 
 const reducer = (state = INITIAL_STATE, action) => { 
   switch (action.type) { 
+    case 'HIDE_SETTINGS' : 
+      return {...state, hideSettings: action.hideSettings}
     case 'SET_PASSWORD': 
       return {...state, password: action.password} 
     case 'SET_WEBSITE' : 

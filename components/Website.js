@@ -14,7 +14,8 @@ class Website extends React.Component {
   state = {    
     openSidebar: false,
     url: '',
-    key: 1
+    key: 1,
+    hideSettings: false,
   }
   constructor(props) {
     super(props)
@@ -23,7 +24,10 @@ class Website extends React.Component {
 
   // Save a url of Redux store to local state.
   componentDidMount() {
-    this.setState({url: this.props.url})
+    this.setState({
+      hideSettings: this.props.hideSettings,
+      url: this.props.url
+    });
   }
 
   componentWillMount() {
@@ -47,13 +51,15 @@ class Website extends React.Component {
   // When click settings icon.
   handleSettings = () => {
     this.setState({openSidebar: !this.state.openSidebar});
-    console.log(this.state.openSidebar);
   }
 
   // When click 'Set Page' button.
-  changeWebsite = (url) => {
-    this.setState({url: url});
-    this.setState({openSidebar: false});
+  changeWebsite = (data) => {
+    this.setState({
+      url: data.url,
+      hideSettings: data.hideSettings,
+      openSidebar: false,
+    });
   }
 
   // When click 'REFRESH' button.
@@ -69,38 +75,49 @@ class Website extends React.Component {
     return (
       <View style={styles.container}>
         <WebView
-            key={this.state.key}
-            ref={ref => (this.webview = ref)} 
-            useWebKit={true}
-            originWhitelist={['*']}
-            cacheEnabled={false}
-            startInLoadingState={true}
-            source={{uri: this.state.url}}
-            onNavigationStateChange={navState => {
-              this.canGoBack = navState.canGoBack;
-            }} />
+          key={this.state.key}
+          ref={ref => (this.webview = ref)} 
+          useWebKit={true}
+          originWhitelist={['*']}
+          cacheEnabled={false}
+          startInLoadingState={true}
+          source={{uri: this.state.url}}
+          onNavigationStateChange={navState => {
+            this.canGoBack = navState.canGoBack;
+          }} />
+        
         {/* Top bar */}
         {
-          this.state.openSidebar ? (
-            <View style={styles.topbar}>
-              <View style={styles.sidebar}>
-                <Settings reset={true} navigation={this.props.navigation} onPress={this.changeWebsite.bind(this)} onRefresh={this.handleRefresh.bind(this)}/>
+          this.state.hideSettings ? (
+            <View></View>
+          ) : [
+            this.state.openSidebar ? (
+              <View style={styles.topbar}>
+                <View style={styles.sidebar}>
+                  <Settings 
+                    reset={true}
+                    hideSettings={this.state.hideSettings}
+                    navigation={this.props.navigation}
+                    onPress={this.changeWebsite.bind(this)}
+                    onRefresh={this.handleRefresh.bind(this)}
+                  />
+                </View>
+                <View style={styles.triangle}>
+                  <TouchableOpacity style={styles.settings} activeOpacity={0.8} onPress={this.handleSettings}>
+                    <Icon  name="cog" size={20} color="#ddd"/>
+                  </TouchableOpacity>
+                </View>
               </View>
-              <View style={styles.triangle}>
-                <TouchableOpacity style={styles.settings} activeOpacity={0.8} onPress={this.handleSettings}>
-                  <Icon  name="cog" size={20} color="#ddd"/>
-                </TouchableOpacity>
+            ) : (
+              <View style={styles.topbar}>
+                <View style={styles.triangle}>
+                  <TouchableOpacity style={styles.settings} activeOpacity={0.8} onPress={this.handleSettings}>
+                    <Icon  name="cog" size={20} color="#ddd"/>
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
-          ) : (
-            <View style={styles.topbar}>
-              <View style={styles.triangle}>
-                <TouchableOpacity style={styles.settings} activeOpacity={0.8} onPress={this.handleSettings}>
-                  <Icon  name="cog" size={20} color="#ddd"/>
-                </TouchableOpacity>
-              </View>
-            </View>
-          )
+            )
+          ]
         }
         
       </View>
@@ -151,6 +168,7 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
   url: state.user.url,
+  hideSettings: state.user.hideSettings,
 });
 
 export default connect(
