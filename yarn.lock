@@ -5259,10 +5259,10 @@ react-native-webview-cleaner@^0.1.0:
   resolved "https://registry.yarnpkg.com/react-native-webview-cleaner/-/react-native-webview-cleaner-0.1.0.tgz#7c6553295704e04023cce86ddedef2eb617c8f11"
   integrity sha512-jUbYNTW94vnZLuKR4y1S8y8KPOWUkuqMstBKpr3woc9XTXQEWI2c+jGVTSCwd2QgR1holmfZ3B4xCVKxswkZWQ==
 
-react-native-webview@^5.0.1:
-  version "5.9.1"
-  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-5.9.1.tgz#78631ea3cce0ca3b42a9c30087d1b8d85f001b6b"
-  integrity sha512-B/jpXfGB2fVD5vKSeSGSTBY/K+9VaDj7ObbNwbTiUg7McsE1t8yly0t51l0qfhjnTR5YAXMgyrC+qvEuZ1HIYw==
+react-native-webview@5.8.1:
+  version "5.8.1"
+  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-5.8.1.tgz#6f5a83dec55bbc02700155b1a16a668870f14de0"
+  integrity sha512-b6pSvmjoiWtcz6YspggW02X+BRXJWuquHwkh37BRx1NMW1iwMZA31SnFQvTpPzWYYIb9WF/mRsy2nGtt9C6NIg==
   dependencies:
     escape-string-regexp "1.0.5"
     invariant "2.2.4"

@@ -13,7 +13,7 @@
     "react-native-check-box": "^2.1.7",
     "react-native-gesture-handler": "1.0.16",
     "react-native-vector-icons": "^4.6.0",
-    "react-native-webview": "^5.0.1",
+    "react-native-webview": "5.8.1",
     "react-native-webview-cleaner": "^0.1.0",
     "react-navigation": "3.9.1",
     "react-redux": "6.0.0",
