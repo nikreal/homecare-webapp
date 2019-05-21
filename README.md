@@ -53,3 +53,5 @@ With:
 #define PC_FROM_UCONTEXT uc_mcontext->__ss.__rip
 #endif
 ```
+# Issue
+<a href="https://github.com/kmagiera/react-native-gesture-handler/issues/343#issuecomment-468816796">Execution failed for task ':react-native-gesture-handler:compileDebugJavaWithJavac'.</a>
