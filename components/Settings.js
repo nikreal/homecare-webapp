@@ -122,6 +122,7 @@ class Settings extends Component {
         }
         <View style={{width: '80%', flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-start'}}>
           <CheckBox
+            checkBoxColor='#000'
             onClick={()=>{
               this.setState({
                   isChecked:!this.state.isChecked
