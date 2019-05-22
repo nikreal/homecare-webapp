@@ -8,7 +8,7 @@ import {setHideSettings, setPassword, setWebsite} from '../action';
 class Settings extends Component {
   state = {    
     password: '',
-    url: '',
+    url: this.props.url,
     validPassword: true,
     validUrl: true,
     reset: false,
@@ -57,9 +57,9 @@ class Settings extends Component {
     
     if (
       // Check existing password and validation of url when reset website  
-      (this.state.reset && this.state.password === this.props.password && this.validateUrl(this.state.url)) || 
+      (this.state.reset && this.state.password === this.props.password) || 
       // When app starts, validation of password and url
-      (!this.state.reset && this.state.password && this.validateUrl(this.state.url))
+      (!this.state.reset && this.state.password)
     ) {
       // Save password and url in Redux store.      
       this.props.setHideSettings(this.state.isChecked);
@@ -143,7 +143,7 @@ class Settings extends Component {
           value = {this.state.password}
           onChangeText = {this.handlePassword}/>
         <TextInput 
-          style = {this.state.validUrl ? styles.input : {...styles.input, ...invalid}}
+          style = {styles.input}
           underlineColorAndroid = "transparent"
           placeholder = "website url"
           placeholderTextColor = "grey"
