@@ -92,7 +92,7 @@ class Website extends React.Component {
             <View></View>
           ) : [
             this.state.openSidebar ? (
-              <View style={styles.topbar}>
+              <View key={1} style={styles.topbar}>
                 <View style={styles.sidebar}>
                   <Settings 
                     reset={true}
@@ -109,7 +109,7 @@ class Website extends React.Component {
                 </View>
               </View>
             ) : (
-              <View style={styles.topbar}>
+              <View key={2} style={styles.topbar}>
                 <View style={styles.triangle}>
                   <TouchableOpacity style={styles.settings} activeOpacity={0.8} onPress={this.handleSettings}>
                     <Icon  name="cog" size={20} color="#ddd"/>
